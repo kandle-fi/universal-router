@@ -22,7 +22,8 @@ abstract contract DeployUniversalRouter is Script {
     function setUp() public virtual;
 
     function run() external returns (UniversalRouter router) {
-        vm.startBroadcast();
+        uint256 deployerPrivateKey = vm.envUint("UNI_PRIVATE_KEY");
+        vm.startBroadcast(deployerPrivateKey);
 
         // deploy permit2 if it isnt yet deployed
         if (params.permit2 == address(0)) revert Permit2NotDeployed();
